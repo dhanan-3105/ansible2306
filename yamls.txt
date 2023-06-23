@@ -31,6 +31,10 @@ Ansible YAML
    - name: write a file
      file: path=/home/opc/configfiles state=touch
 
+    - name: closure
+     debug:
+        msg : "file created in {{inventory_hostname}}"
+
 usecase2.yaml
 ---
  - name: install binaries on host
@@ -47,8 +51,6 @@ usecase2.yaml
       debug:
        msg: file created
 
-   - name: closure
-     debug:
-        msg : "file created in {{inventory_hostname}}"
+  
 
 
