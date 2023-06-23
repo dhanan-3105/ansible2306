@@ -48,7 +48,7 @@ usecase2.yaml
       - glibc-devel
       - htop
    - name : print message
-      debug:
+     debug:
        msg: file created
 
   
