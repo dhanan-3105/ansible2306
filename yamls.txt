@@ -84,3 +84,18 @@ usecase4.yaml
       command: curl {{ansible_hostname}}:8085
     - name: remove container
       command : podman rm -f testnginx
+
+
+usecase5.yaml
+
+- name: Get namespace name
+  hosts: localhost
+  collections:
+    - oracle.oci
+  tasks:
+    - name: Get namespace name
+      oci_object_storage_namespace_facts:
+      register: output
+    - name: Print namespace name
+      debug:
+        msg: "{{ output }}"
