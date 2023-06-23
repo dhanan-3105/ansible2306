@@ -66,3 +66,21 @@ usecase3.yaml
   - name: restart apache
     service: name=httpd state=restarted
 
+
+usecase4.yaml
+============
+
+- hosts: localhost
+  connection: local
+  become: yes
+  tasks:
+    - name: install podman
+      command: yum install -y podman
+    - name: deploy nginx podman container
+      command: podman run -d  --name testapache --privileged -p 8085:80 httpd
+    - name: list all containers
+      command: podman  ps -a
+    - name: verify service working
+      command: curl {{ansible_hostname}}:8085
+    - name: remove container
+      command : podman rm -f testnginx
