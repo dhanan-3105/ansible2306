@@ -119,3 +119,36 @@ usecase6.yaml
    - name : print ADs
      debug:
        msg: {{ result }}
+
+
+usecase7.yaml
+
+---
+
+- name : List summary
+  collections:
+    - oracle.oci
+  connection: local
+  hosts: localhost
+  tasks:
+   - name: List availability domains
+     oci_identity_availability_domain_facts:
+     # required
+       compartment_id: "tenancy-ocid"
+     register: result
+
+   - name: List shapes
+     oci_compute_shape_facts:
+      # required
+      compartment_id: "compartment-oicd"
+      # optional
+     register: result1
+
+   - name : print all the AD's
+     debug:
+      msg: "{{ result }}"
+
+
+   - name : print all the shapes
+     debug:
+      msg: "{{ result1 }}"
