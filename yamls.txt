@@ -31,6 +31,21 @@ Ansible YAML
    - name: write a file
      file: path=/home/opc/configfiles state=touch
 
+usecase2.yaml
+---
+ - name: install binaries on host
+   hosts: all
+   become: true
+   tasks:
+   - name: install packages
+     yum: name={{item}} state=latest
+     loop:
+      - openssl-devel
+      - glibc-devel
+      - htop
+   - name : print message
+      debug:
+       msg: file created
 
    - name: closure
      debug:
